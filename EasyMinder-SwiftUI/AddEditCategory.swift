@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AddEditCategory: View {
+    @Environment(\.managedObjectContext) var moc
+
     @Environment(\.dismiss) var dismiss
     @State private var categoryName = ""
     
@@ -38,7 +40,7 @@ struct AddEditCategory: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
-                        dismiss()
+                        save()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(selectedColor)
@@ -46,12 +48,14 @@ struct AddEditCategory: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        
                     } label: {
                         Text("Save")
-                            .foregroundColor(selectedColor)
+                            .foregroundColor(categoryName.isEmpty ? .gray : selectedColor)
                             .font(.headline)
                     }
+                    .disabled(categoryName.isEmpty)
+
+
                 }
                 ToolbarItem(placement: .principal) {
                     selectedIcon
@@ -62,30 +66,11 @@ struct AddEditCategory: View {
 
     }
     
-    func roundedRectangleSection(colors: [Color]) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(.systemGray6))
-            
-            HStack {
-                ForEach(colors, id: \.self) { color in
-                    Spacer()
-                    Button {
-                        selectedColor = color
-                    } label: {
-                        Circle()
-                            .fill(color)
-                            .frame(width: 40, height: 40)
-                            .overlay(
-                                Circle()
-                                    .stroke(selectedColor == color ? Color.white: Color.clear, lineWidth: 2)
-                            )
-                    }
-                    Spacer()
-                }
-            }
-            .padding(10)
-        }
+    func save() {
+        let newCategory = Category(context: moc)
+        newCategory.name = categoryName
+        
+        dismiss()
     }
 }
 
