@@ -11,9 +11,9 @@ struct SelectIconView: View {
     
     private var itemsOnRow = 6
 
-    @Binding var selectedIcon: Image
-    private var icons: [Image]
-    private var chunkedIcons: [[Image]] {
+    @Binding var selectedIcon: String
+    private var icons: [String]
+    private var chunkedIcons: [[String]] {
         icons.chunked(into: itemsOnRow)
     }
 
@@ -30,7 +30,7 @@ struct SelectIconView: View {
                             Button {
                                 selectedIcon = chunkedIcons[index][iconIndex]
                             } label: {
-                                chunkedIcons[index][iconIndex]
+                                Image(systemName: chunkedIcons[index][iconIndex])
                                     .foregroundColor(selectedIcon == chunkedIcons[index][iconIndex] ? Color.gray : Color.white)
                                     .frame(width: 50, height: 50)
 
@@ -45,7 +45,7 @@ struct SelectIconView: View {
         }
     }
     
-    init(_ icons: [Image], selectedIcon: Binding<Image>) {
+    init(_ icons: [String], selectedIcon: Binding<String>) {
         self.icons = icons
         self._selectedIcon = selectedIcon
     }

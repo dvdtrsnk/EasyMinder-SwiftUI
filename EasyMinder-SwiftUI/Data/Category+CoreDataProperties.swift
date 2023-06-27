@@ -48,6 +48,13 @@ extension Category {
     public var wrappedDateCreated: Date {
         dateCreated ?? Date.now
     }
+    
+    public var wrappedItems: [Item] {
+        let set = items as? Set<Item> ?? []
+        return set.sorted {
+            $0.wrappedName < $1.wrappedName
+        }
+    }
 
 }
 

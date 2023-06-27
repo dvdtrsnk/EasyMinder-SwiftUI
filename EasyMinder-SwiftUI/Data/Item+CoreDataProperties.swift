@@ -22,6 +22,7 @@ extension Item {
     @NSManaged public var notes: String?
     @NSManaged public var dateCreated: Date?
     @NSManaged public var notification: Bool
+    @NSManaged public var isDone: Bool
     @NSManaged public var parentCategory: Category?
     
     public var wrappedName: String {
@@ -34,6 +35,10 @@ extension Item {
     
     public var wrappedNotes: String {
         notes ?? ""
+    }
+    
+    public var wrappedParentCategory: Category {
+        parentCategory!
     }
 
 }

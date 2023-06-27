@@ -14,9 +14,9 @@ struct AddEditCategoryView: View {
     @State private var categoryName = ""
     
     @State private var selectedColor: Color = .red
-    @State private var selectedIcon: Image = Image(systemName: "person.fill")
+    @State private var selectedIcon: String = "book"
     private let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink, .gray, .black, .white, .brown, .teal]
-    private let icons: [Image] = [Image(systemName: "book.fill"), Image(systemName: "cart.fill"), Image(systemName: "heart.fill"), Image(systemName: "person.fill"), Image(systemName: "airplane"), Image(systemName: "film.fill"), Image(systemName: "flag.fill"), Image(systemName: "star.fill"), Image(systemName: "gamecontroller.fill"), Image(systemName: "cloud.fill"), Image(systemName: "bolt.fill"), Image(systemName: "camera.fill"), Image(systemName: "bell.fill"), Image(systemName: "gift.fill"), Image(systemName: "magnifyingglass.circle.fill"), Image(systemName: "mic.fill"), Image(systemName: "paintbrush.fill"), Image(systemName: "sun.max.fill")]
+    private let icons: [String] = ["book.fill", "cart.fill", "heart.fill", "person.fill", "airplane", "film.fill", "flag.fill", "star.fill", "gamecontroller.fill", "cloud.fill", "bolt.fill", "camera.fill", "bell.fill", "gift.fill", "magnifyingglass.circle.fill", "mic.fill", "paintbrush.fill", "sun.max.fill"]
 
    
     var body: some View {
@@ -59,7 +59,7 @@ struct AddEditCategoryView: View {
 
                 }
                 ToolbarItem(placement: .principal) {
-                    selectedIcon
+                    Image(systemName: selectedIcon)
                         .foregroundColor(selectedColor)
                 }
             }
@@ -70,11 +70,12 @@ struct AddEditCategoryView: View {
     func save() {
         let newCategory = Category(context: moc)
         newCategory.name = categoryName
-        newCategory.icon = "circle"
+        newCategory.icon = selectedIcon
         newCategory.color = selectedColor.toRGBString()
         newCategory.dateCreated = Date.now
         newCategory.id = UUID()
         
+                
         try? moc.save()
         
         dismiss()
@@ -87,5 +88,18 @@ struct AddEditCategoryView: View {
 struct AddEditCategory_Previews: PreviewProvider {
     static var previews: some View {
         AddEditCategoryView()
+    }
+}
+
+
+
+
+extension Image {
+
+    var sfSymbolName: String? {
+        guard let strSeq = "\(String(describing: self))".split(separator: ")").first else { return nil }
+        let str = String(strSeq)
+        guard let name = str.split(separator: ":").last else { return nil }
+        return String(name)
     }
 }

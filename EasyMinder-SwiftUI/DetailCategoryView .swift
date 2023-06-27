@@ -8,41 +8,82 @@
 import SwiftUI
 
 struct DetailCategoryView: View {
-    @State private var newItem = ""
+    @Environment(\.managedObjectContext) var moc
+    
+    
+    @State private var newItemName = ""
+    @State private var category: Category
+    
     var body: some View {
         NavigationView {
-            ZStack {
-                Image(systemName: "list.bullet")
-                    .foregroundColor(.blue)
-                    .font(.system(size: 150))
-                    .opacity(0.2)
+            VStack {
                 ScrollView {
                     VStack {
-                        ForEach(0..<20) { row in
+                        ForEach(category.wrappedItems, id: \.id) { item in
                             HStack {
-                                Image(systemName: "circle")
+                                Image(systemName: item.isDone ? "circle.fill" : "circle")
                                     .font(.system(size: 23))
+                                
+                                Text("\(item.wrappedName)")
                                 Spacer()
-                                Text("\(row)")
-                                Spacer()
+                                Image(systemName: "info")
                             }
                             
                         }
                         .padding(2)
-                        TextField("Add New Reminder", text: $newItem)
                     }
                     
                     .padding()
                 }
-                .navigationTitle("Category name")
-                .navigationBarTitleDisplayMode(.inline)
+                ZStack {
+                    Color(UIColor.systemBackground)
+                        .frame(height: 40)
+                    HStack {
+                        TextField("Add New Reminder", text: $newItemName)
+                        Button {
+                            saveNewItem()
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.system(size: 30))
+                        }
+                    }
+                    .padding(.horizontal)
+
+
+                }
+                
             }
+            
+
+        }
+        .navigationTitle("Category name")
+
+    }
+    
+    init(_ category: Category) {
+        self.category = category
+    }
+    
+    func saveNewItem() {
+        if newItemName == "" {
+            
+        } else {
+            let newItem = Item(context: moc)
+            newItem.name = newItemName
+            newItem.dateCreated = Date.now
+            newItem.id = UUID()
+            newItem.notification = false
+            newItem.parentCategory = category
+            newItem.isDone = false
+            category.addToItems(newItem)
+            
+            try? moc.save()
         }
     }
 }
 
-struct DetailCategoryView__Previews: PreviewProvider {
-    static var previews: some View {
-        DetailCategoryView()
-    }
-}
+//struct DetailCategoryView__Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailCategoryView()
+//    }
+//}

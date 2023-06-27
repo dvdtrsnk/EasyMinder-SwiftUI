@@ -30,7 +30,7 @@ struct ContentView: View {
                     List {
                         ForEach(categories, id: \.id) { category in
                             NavigationLink {
-                                DetailCategoryView()
+                                DetailCategoryView(category)
                             } label: {
                                 HStack {
                                     category.wrappedIcon
@@ -67,12 +67,6 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingAddEditCategory) {
                 AddEditCategoryView()
-            }
-            .onAppear {
-                var myColor: Color = .red
-                var myStringColor = myColor.toRGBString()
-                var colorAsColor = Color.fromRGBString(myStringColor)
-                print("\(myStringColor), a zpět \(colorAsColor)")
             }
         }
     }
