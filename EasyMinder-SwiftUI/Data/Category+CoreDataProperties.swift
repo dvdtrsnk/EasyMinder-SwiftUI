@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 
 extension Category {
@@ -22,6 +23,31 @@ extension Category {
     @NSManaged public var color: String?
     @NSManaged public var dateCreated: Date?
     @NSManaged public var items: NSSet?
+    
+    public var wrappedName: String {
+        name ?? "Unknown Category"
+    }
+    
+    public var wrappedId: UUID {
+        id ?? UUID()
+    }
+    
+    public var wrappedIcon: Image {
+        if let icon = icon {
+            return Image(systemName: icon)
+        } else {
+            return Image(systemName: "xmark")
+
+        }
+    }
+    
+    public var wrappedColor: Color {
+        Color.fromRGBString(color ?? "")
+    }
+    
+    public var wrappedDateCreated: Date {
+        dateCreated ?? Date.now
+    }
 
 }
 

@@ -12,7 +12,7 @@
 		639612CA2A4AD2240077B6B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 639612C92A4AD2240077B6B0 /* Assets.xcassets */; };
 		639612CD2A4AD2240077B6B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 639612CC2A4AD2240077B6B0 /* Preview Assets.xcassets */; };
 		639612D62A4ADA5D0077B6B0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612D52A4ADA5D0077B6B0 /* SettingsView.swift */; };
-		639612DA2A4ADEAC0077B6B0 /* AddEditCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612D92A4ADEAC0077B6B0 /* AddEditCategory.swift */; };
+		639612DA2A4ADEAC0077B6B0 /* AddEditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612D92A4ADEAC0077B6B0 /* AddEditCategoryView.swift */; };
 		639612DC2A4AEAA10077B6B0 /* SelectColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612DB2A4AEAA10077B6B0 /* SelectColorView.swift */; };
 		639612DE2A4B078D0077B6B0 /* Array-Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612DD2A4B078D0077B6B0 /* Array-Chunked.swift */; };
 		639612E02A4B0BA50077B6B0 /* SelectIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612DF2A4B0BA50077B6B0 /* SelectIconView.swift */; };
@@ -22,6 +22,8 @@
 		639612F32A4B17F30077B6B0 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612EF2A4B17F30077B6B0 /* Category+CoreDataProperties.swift */; };
 		639612F42A4B17F30077B6B0 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612F02A4B17F30077B6B0 /* Item+CoreDataClass.swift */; };
 		639612F52A4B17F30077B6B0 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612F12A4B17F30077B6B0 /* Item+CoreDataProperties.swift */; };
+		639612FA2A4B22A60077B6B0 /* Color-FromToRGBString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612F92A4B22A60077B6B0 /* Color-FromToRGBString.swift */; };
+		639612FC2A4B2BB10077B6B0 /* DetailCategoryView .swift in Sources */ = {isa = PBXBuildFile; fileRef = 639612FB2A4B2BB10077B6B0 /* DetailCategoryView .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +33,7 @@
 		639612C92A4AD2240077B6B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		639612CC2A4AD2240077B6B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		639612D52A4ADA5D0077B6B0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		639612D92A4ADEAC0077B6B0 /* AddEditCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCategory.swift; sourceTree = "<group>"; };
+		639612D92A4ADEAC0077B6B0 /* AddEditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCategoryView.swift; sourceTree = "<group>"; };
 		639612DB2A4AEAA10077B6B0 /* SelectColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorView.swift; sourceTree = "<group>"; };
 		639612DD2A4B078D0077B6B0 /* Array-Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Chunked.swift"; sourceTree = "<group>"; };
 		639612DF2A4B0BA50077B6B0 /* SelectIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconView.swift; sourceTree = "<group>"; };
@@ -41,6 +43,8 @@
 		639612EF2A4B17F30077B6B0 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		639612F02A4B17F30077B6B0 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		639612F12A4B17F30077B6B0 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		639612F92A4B22A60077B6B0 /* Color-FromToRGBString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-FromToRGBString.swift"; sourceTree = "<group>"; };
+		639612FB2A4B2BB10077B6B0 /* DetailCategoryView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailCategoryView .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +82,9 @@
 				639612C72A4AD2230077B6B0 /* ContentView.swift */,
 				639612E32A4B15FD0077B6B0 /* EasyMinder-SwiftUI.xcdatamodeld */,
 				639612E12A4B158E0077B6B0 /* DataController.swift */,
-				639612D92A4ADEAC0077B6B0 /* AddEditCategory.swift */,
+				639612D92A4ADEAC0077B6B0 /* AddEditCategoryView.swift */,
+				639612FB2A4B2BB10077B6B0 /* DetailCategoryView .swift */,
+				639612F92A4B22A60077B6B0 /* Color-FromToRGBString.swift */,
 				639612DB2A4AEAA10077B6B0 /* SelectColorView.swift */,
 				639612DF2A4B0BA50077B6B0 /* SelectIconView.swift */,
 				639612DD2A4B078D0077B6B0 /* Array-Chunked.swift */,
@@ -186,11 +192,13 @@
 				639612F52A4B17F30077B6B0 /* Item+CoreDataProperties.swift in Sources */,
 				639612C62A4AD2230077B6B0 /* EasyMinder_SwiftUIApp.swift in Sources */,
 				639612F42A4B17F30077B6B0 /* Item+CoreDataClass.swift in Sources */,
+				639612FC2A4B2BB10077B6B0 /* DetailCategoryView .swift in Sources */,
 				639612F32A4B17F30077B6B0 /* Category+CoreDataProperties.swift in Sources */,
 				639612DC2A4AEAA10077B6B0 /* SelectColorView.swift in Sources */,
 				639612E22A4B158E0077B6B0 /* DataController.swift in Sources */,
 				639612DE2A4B078D0077B6B0 /* Array-Chunked.swift in Sources */,
-				639612DA2A4ADEAC0077B6B0 /* AddEditCategory.swift in Sources */,
+				639612DA2A4ADEAC0077B6B0 /* AddEditCategoryView.swift in Sources */,
+				639612FA2A4B22A60077B6B0 /* Color-FromToRGBString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  AddEditCategory.swift
+//  AddEditCategoryView.swift
 //  EasyMinder-SwiftUI
 //
 //  Created by David Třešňák on 27.06.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddEditCategory: View {
+struct AddEditCategoryView: View {
     @Environment(\.managedObjectContext) var moc
 
     @Environment(\.dismiss) var dismiss
@@ -40,7 +40,7 @@ struct AddEditCategory: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
-                        save()
+                        dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(selectedColor)
@@ -48,6 +48,7 @@ struct AddEditCategory: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
+                        save()
                     } label: {
                         Text("Save")
                             .foregroundColor(categoryName.isEmpty ? .gray : selectedColor)
@@ -69,6 +70,12 @@ struct AddEditCategory: View {
     func save() {
         let newCategory = Category(context: moc)
         newCategory.name = categoryName
+        newCategory.icon = "circle"
+        newCategory.color = selectedColor.toRGBString()
+        newCategory.dateCreated = Date.now
+        newCategory.id = UUID()
+        
+        try? moc.save()
         
         dismiss()
     }
@@ -79,6 +86,6 @@ struct AddEditCategory: View {
 
 struct AddEditCategory_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditCategory()
+        AddEditCategoryView()
     }
 }

@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingAddEditCategory = false
     
+    
     var body: some View {
         NavigationView {
             Form {
@@ -26,8 +27,19 @@ struct ContentView: View {
                 }
                 
                 Section("MY LISTS") {
-                    List(0..<20) {
-                        Text("row \($0)")
+                    List {
+                        ForEach(categories, id: \.id) { category in
+                            NavigationLink {
+                                DetailCategoryView()
+                            } label: {
+                                HStack {
+                                    category.wrappedIcon
+                                        .foregroundColor(category.wrappedColor)
+                                    Text(category.name!)
+                                }
+                            }
+                        }
+                        .onDelete(perform: deleteCategory)
                     }
                     .listRowSeparator(.hidden)
                 }
@@ -54,9 +66,23 @@ struct ContentView: View {
                 SettingsView()
             }
             .sheet(isPresented: $showingAddEditCategory) {
-                AddEditCategory()
+                AddEditCategoryView()
+            }
+            .onAppear {
+                var myColor: Color = .red
+                var myStringColor = myColor.toRGBString()
+                var colorAsColor = Color.fromRGBString(myStringColor)
+                print("\(myStringColor), a zpět \(colorAsColor)")
             }
         }
+    }
+    
+    func deleteCategory(at offsets: IndexSet) {
+        for offset in offsets {
+            let category = categories[offset]
+            moc.delete(category)
+        }
+        try? moc.save()
     }
 }
 

@@ -23,6 +23,18 @@ extension Item {
     @NSManaged public var dateCreated: Date?
     @NSManaged public var notification: Bool
     @NSManaged public var parentCategory: Category?
+    
+    public var wrappedName: String {
+        name ?? "Unknown Name"
+    }
+    
+    public var wrappedId: UUID {
+        id ?? UUID()
+    }
+    
+    public var wrappedNotes: String {
+        notes ?? ""
+    }
 
 }
 
