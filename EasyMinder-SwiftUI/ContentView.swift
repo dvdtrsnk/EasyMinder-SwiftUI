@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: Category.entity(), sortDescriptors: []) var categories: FetchedResults<Category>
+
+    
     @State private var showingSettings = false
     @State private var showingAddEditCategory = false
     
