@@ -17,6 +17,7 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 SelectColorView(colors, selectedColor: $selectedColor)
+                    .padding(.horizontal)
             }
             .navigationTitle("Settings")
             .toolbar {

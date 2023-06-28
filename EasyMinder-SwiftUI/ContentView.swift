@@ -15,13 +15,29 @@ struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingAddEditCategory = false
     
+    private let filterOptions: [(name: String, color: Color, icon: Image, predicate: NSPredicate, id: UUID)] = [
+        (name: "All Tasks", color: Color(.blue), icon: Image(systemName: "mail.stack"), predicate: NSPredicate(value: true), id: UUID()),
+        (name: "Today", color: Color(.red), icon: Image(systemName: "clock.badge.exclamationmark"), predicate: NSPredicate(value: true), id: UUID()),
+        (name: "Scheduled", color: Color(.green), icon: Image(systemName: "calendar"), predicate: NSPredicate(value: true), id: UUID())
+        ]
+    
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    List(0..<3) {
-                        Text("row \($0)")
+                    List {
+                        ForEach(filterOptions, id: \.id) { filter in
+                            NavigationLink {
+                                DetailCategoryView(filter.predicate, title: filter.name, icon: filter.icon, color: filter.color)
+                            } label: {
+                                HStack {
+                                    filter.icon
+                                        .foregroundColor(filter.color)
+                                    Text(filter.name)
+                                }
+                            }
+                        }
                     }
                     .listRowSeparator(.hidden)
                 }
@@ -30,7 +46,7 @@ struct ContentView: View {
                     List {
                         ForEach(categories, id: \.id) { category in
                             NavigationLink {
-                                DetailCategoryView(category)
+                                DetailCategoryView(NSPredicate(format: "parentCategory == %@", category), category, title: category.wrappedName, icon: category.wrappedIcon, color: category.wrappedColor)
                             } label: {
                                 HStack {
                                     category.wrappedIcon

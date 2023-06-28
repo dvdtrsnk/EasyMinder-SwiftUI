@@ -9,12 +9,12 @@ import SwiftUI
 
 struct AddEditCategoryView: View {
     @Environment(\.managedObjectContext) var moc
-
     @Environment(\.dismiss) var dismiss
+    
     @State private var categoryName = ""
     
     @State private var selectedColor: Color = .red
-    @State private var selectedIcon: String = "book"
+    @State private var selectedIcon: String = "book.fill"
     private let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink, .gray, .black, .white, .brown, .teal]
     private let icons: [String] = ["book.fill", "cart.fill", "heart.fill", "person.fill", "airplane", "film.fill", "flag.fill", "star.fill", "gamecontroller.fill", "cloud.fill", "bolt.fill", "camera.fill", "bell.fill", "gift.fill", "magnifyingglass.circle.fill", "mic.fill", "paintbrush.fill", "sun.max.fill"]
 

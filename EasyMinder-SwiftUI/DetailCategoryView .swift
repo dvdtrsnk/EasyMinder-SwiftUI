@@ -8,60 +8,75 @@
 import SwiftUI
 
 struct DetailCategoryView: View {
+    
     @Environment(\.managedObjectContext) var moc
+        @FetchRequest var items: FetchedResults<Item>
     
     
     @State private var newItemName = ""
-    @State private var category: Category
+    private var category: Category?
+    private let categoryTitle: String
+    private let categoryIcon: Image
+    private let categoryColor: Color
     
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView {
-                    VStack {
-                        ForEach(category.wrappedItems, id: \.id) { item in
-                            HStack {
-                                Image(systemName: item.isDone ? "circle.fill" : "circle")
-                                    .font(.system(size: 23))
+            ZStack {
+                VStack {
+                    ScrollView {
+                        VStack {
+                            ForEach(items, id: \.id) { item in
+                                HStack {
+                                    Image(systemName: item.isDone ? "circle.fill" : "circle")
+                                        .foregroundColor(item.parentCategory?.wrappedColor)
+                                        .font(.system(size: 23))
+                                        .onTapGesture {
+                                            item.isDone.toggle()
+                                        }
+                                    
+                                    Text("\(item.wrappedName)")
+                                    Spacer()
+                                    Image(systemName: "info")
+                                }
                                 
-                                Text("\(item.wrappedName)")
-                                Spacer()
-                                Image(systemName: "info")
                             }
-                            
+                            .padding(2)
                         }
-                        .padding(2)
+                        .padding()
                     }
-                    
-                    .padding()
-                }
-                ZStack {
-                    Color(UIColor.systemBackground)
-                        .frame(height: 40)
-                    HStack {
-                        TextField("Add New Reminder", text: $newItemName)
-                        Button {
-                            saveNewItem()
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.system(size: 30))
+                    ZStack {
+                        Color(UIColor.systemBackground)
+                            .frame(height: 40)
+                        HStack {
+                            TextField("Add New Reminder", text: $newItemName)
+                            Button {
+                                saveNewItem()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 30))
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
-
-
                 }
+                
+                categoryIcon
+                    .font(.system(size: 150))
+                    .foregroundColor(categoryColor)
+                    .opacity(0.2)
                 
             }
             
-
         }
-        .navigationTitle("Category name")
-
+        .navigationTitle(categoryTitle)
     }
     
-    init(_ category: Category) {
+    init(_ predicate: NSPredicate,_ category: Category? = nil, title: String, icon: Image, color: Color) {
+        self.categoryColor = color
+        self.categoryIcon = icon
+        self.categoryTitle = title
         self.category = category
+        _items = FetchRequest<Item>(sortDescriptors: [], predicate: predicate)
     }
     
     func saveNewItem() {
@@ -75,7 +90,7 @@ struct DetailCategoryView: View {
             newItem.notification = false
             newItem.parentCategory = category
             newItem.isDone = false
-            category.addToItems(newItem)
+            category!.addToItems(newItem)
             
             try? moc.save()
         }
